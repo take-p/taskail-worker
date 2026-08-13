@@ -121,8 +121,11 @@ main() {
     echo "次にやること:"
     echo "  1. claude が入っていて、サブスクでログイン済みであること"
     echo "  2. taskail-worker login    （Taskail にログインする）"
-    echo "  3. ~/.taskail/config.json を書く（docs/worker-setup.md を参照）"
+    echo "  3. ~/.taskail/config.json を書く"
     echo "  4. taskail-worker start"
+    echo
+    # **配布先の README を指す。** docs/ は本体（非公開）にあり、入れた人には読めない
+    echo "書きかた: https://github.com/${REPO}#入れかた"
 }
 
 main
