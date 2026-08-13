@@ -61,7 +61,7 @@ taskail-worker login
 | `mcp.strict` | `true` | 他の MCP を混ぜない |
 | `claude.model` | 未指定 | `claude --model` に渡す |
 | `claude.permissionMode` | `acceptEdits` | **`manual` にしないこと**（ヘッドレスで必ず固まります） |
-| `claude.allowedTools` | Read/Edit/Write/Glob/Grep/Bash + `mcp__<server>__*` | AI に何をさせてよいかの唯一の絞り込み口 |
+| `claude.allowedTools` | Read/Edit/Write/Glob/Grep/Bash/**WebSearch** + `mcp__<server>__*` | **自動承認する一覧**です（使えるツールの制限ではありません）。**書くと既定が丸ごと置き換わる**ので `mcp__<server>__*` を必ず含めてください。`WebFetch` は既定に含みません（無人実行では、取得先のページに書かれた指示を読んでしまう経路になるため） |
 | `claude.timeoutMinutes` | `60` | 1回の実行の上限（分）。`0` で無制限 |
 | `projects[]` | 必須 | **ファイルが手元にある**プロジェクトの申告。`defaultPath` があれば空でもよい |
 | `projects[].path` | 必須 | 作業ディレクトリ。**git リポジトリのルートを指すと worktree で隔離されます** |
