@@ -77,6 +77,20 @@ smoke_test() {
     esac
 }
 
+# Linux の Claude Code のサンドボックスは bubblewrap と socat で動く。ワーカーは
+# サンドボックスが起動できなければ claude ごと止める設定なので、無いと依頼が全部失敗する。
+# 入れるのは利用者に任せ、ここでは案内だけする（sudo を勝手に走らせない）
+check_sandbox_deps() {
+    [ "$(uname -s)" = "Linux" ] || return 0
+    missing=""
+    command -v bwrap > /dev/null 2>&1 || missing="${missing} bubblewrap"
+    command -v socat > /dev/null 2>&1 || missing="${missing} socat"
+    [ -n "${missing}" ] || return 0
+    echo
+    echo "※ Claude Code のサンドボックスに要るパッケージがありません:${missing}"
+    echo "  入れないと AI の実行がすべて失敗します。Debian / Ubuntu なら: sudo apt install${missing}"
+}
+
 main() {
     command -v curl > /dev/null 2>&1 || die "curl が要ります"
     command -v tar > /dev/null 2>&1 || die "tar が要ります"
@@ -117,6 +131,7 @@ main() {
         *":${INSTALL_DIR}:"*) ;;
         *) echo "※ ${INSTALL_DIR} が PATH にありません。シェルの設定に追加してください。" ;;
     esac
+    check_sandbox_deps
     echo
     echo "次にやること:"
     echo "  1. claude が入っていて、サブスクでログイン済みであること"

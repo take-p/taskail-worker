@@ -102,7 +102,7 @@ taskail-worker start
 | | |
 | --- | --- |
 | macOS | Apple Silicon のみ。**Intel Mac は非対応** |
-| Linux | arm64 / x64。**`libatomic1` が要ります**（`sudo apt install libatomic1`） |
+| Linux | arm64 / x64。**`libatomic1` が要ります**（`sudo apt install libatomic1`）。Claude Code のサンドボックスに **`bubblewrap` と `socat`** も要ります（`sudo apt install bubblewrap socat`。無いと AI の実行がすべて失敗します）。Windows は WSL2 の中で linux-x64 を使ってください |
 
 macOS のバイナリは ad-hoc 署名のみで公証していないため、Gatekeeper の警告が出ます。
 
